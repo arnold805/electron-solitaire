@@ -8,9 +8,9 @@ body {
   height: 100vh;
   background: linear-gradient(
     200.96deg,
-    #fedc2a -29.09%,
-    #dd5789 51.77%,
-    #7a2c9e 129.35%
+    #87e194 -29.09%,
+    #1c813e 51.77%,
+    #04350e 129.35%
   );
   font-family: sans-serif;
   overflow-y: hidden;
@@ -33,6 +33,15 @@ button {
   opacity: 0.9;
 }
 
+.newgame-container {
+  display: flex;
+  justify-content: center; /* Horizontally centers the button */
+  margin-top: 50px; /* Optional, for vertical spacing */
+}
+
+.newgamebtn {
+  padding: 10px 20px;
+}
 button:hover {
   transform: scale(1.05);
   opacity: 1;
@@ -54,7 +63,7 @@ a:hover {
   text-decoration: none;
 }
 
-.Hello {
+.Home {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,0 +1,27 @@
+.GameBoard {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 6 equal columns */
+  gap: 10px; /* Adjust spacing between SVGs */
+  justify-content: center; /* Center the grid */
+  /* padding: 20px; */
+  width: 100%; /* Takes full width */
+  margin: 0 auto; /* Center the grid horizontally */
+}
+
+.svg-item {
+  width: 100%;
+  max-width: 100px; /* Optional: set a max size */
+  height: auto;
+  object-fit: contain; /* Ensure the SVG scales within its container */
+}
+
+.empty-space {
+  visibility: hidden; /* Occupies space but stays invisible */
+}
+
+@media (max-width: 600px) {
+  .GameBoard {
+    grid-template-columns: repeat(3, 1fr); /* Switch to 3 columns on smaller screens */
+    gap: 5px;
+  }
+}

@@ -81,6 +81,10 @@ const createWindow = async () => {
     },
   });
 
+  // seems to not react to less than BrowserWindow({width:,height:}) settings
+  // win.setMinimumSize(width, height)
+  mainWindow.setMinimumSize(800, 728);
+
   mainWindow.loadURL(resolveHtmlPath('index.html'));
 
   mainWindow.on('ready-to-show', () => {
