@@ -1,4 +1,5 @@
-import blackicon from 'assets/card_outline_black_plain.svg';
+import blackicon from 'assets/cardfronts/card_outline_black_plain.svg';
+import CardBackground from 'src/renderer/CardBackground';
 import './GameBoard.css';
 
 export default function GameBoard() {
@@ -23,12 +24,10 @@ export default function GameBoard() {
     <div className="GameBoard">
       {svgs.map((svg, index) =>
         svg ? (
-          <img
-            key={index}
-            src={svg}
-            alt={`svg-${index}`}
-            className="svg-item"
-          />
+          <div key={index} className="card-container">
+            {index < 1 || index > 6 ? <CardBackground /> : null}
+            <img src={svg} alt={`svg-${index}`} className="svg-item" />
+          </div>
         ) : (
           <div key={index} className="empty-space" />
         ),

@@ -8,11 +8,20 @@ describe('Electron Testing', () => {
     const newGameButton = await $('button=New Game');
     const isButtonPresent = await newGameButton.isExisting();
     expect(isButtonPresent).toBe(true);
+
     await newGameButton.click();
     const gameBoardDiv = await $('.GameBoard');
     const isGameBoardVisible = await gameBoardDiv.isExisting();
     expect(isGameBoardVisible).toBe(true);
+
     const svgImages = await $$('img[src*=".svg"]');
     expect(svgImages.length).toBe(13);
+
+    const butterflyImg = await $('img.card-background');
+    const isButterflyImgPresent = await butterflyImg.isExisting();
+    expect(isButterflyImgPresent).toBe(true);
+
+    const butterflyImgSrc = await butterflyImg.getAttribute('src');
+    expect(butterflyImgSrc).toContain('.png');
   });
 });

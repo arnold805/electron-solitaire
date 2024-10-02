@@ -4,7 +4,7 @@ import {
   Route,
   useNavigate,
 } from 'react-router-dom';
-import icon from '../../assets/card_outline_home.svg';
+import icon from 'assets/cardfronts/card_outline_home.svg';
 import './App.css';
 import GameBoard from './GameBoard';
 

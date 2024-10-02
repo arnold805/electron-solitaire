@@ -1,0 +1,5 @@
+.card-background {
+  position: absolute; /* Position absolutely within the card-container */
+  width: 100px; /* Fill the entire container */
+  height: 140px; /* Fill the entire container */
+}
