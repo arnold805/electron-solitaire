@@ -15,7 +15,7 @@ describe('Electron Testing', () => {
     expect(isGameBoardVisible).toBe(true);
 
     const svgImages = await $$('img[src*=".svg"]');
-    expect(svgImages.length).toBe(13);
+    expect(svgImages.length).toBe(35); // check for 35 total card border svg's (one that is transparent)
 
     const butterflyImg = await $('img.card-background');
     const isButterflyImgPresent = await butterflyImg.isExisting();

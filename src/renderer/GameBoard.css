@@ -1,24 +1,89 @@
 .GameBoard {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr); /* 7 equal columns */
-  gap: 10px; /* Adjust spacing between SVGs */
-  justify-content: center; /* Center the grid */
-  width: 100%; /* Takes full width */
-  margin: 0 auto; /* Center the grid horizontally */
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  max-width: 1024px;
+  max-height: 728px;
+  box-sizing: border-box;
+  position: relative;
+  bottom: 250px;
+}
+
+.first-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.second-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .card-container {
-  position: relative;
-  width: 100%;
-  max-width: 100px; /* Set max size for the card */
-  aspect-ratio: 2 / 3; /* Maintain card aspect ratio */
+  width: 100px;
+  height: 140px;
+  margin-right: 20px;
 }
 
-/*  */
-.svg-item {
+.first-row .card-container:last-child {
+  margin-right: 0;
+}
+
+.tableau-column {
   position: relative;
-  width: 100%;
+  width: 100px;
   height: auto;
-  object-fit: contain; /* Ensure the SVG scales within its container */
-  z-index: 1; /* Place SVG on top of the background */
+  margin: 0;
+}
+
+.tableau-cards {
+  position: absolute;
+}
+
+/* Dynamic stacking based on cardIndex */
+.card-0 {
+  z-index: 0;
+  top: 0px;
+}
+
+.card-1 {
+  z-index: 1;
+  top: 15px;
+}
+
+.card-2 {
+  z-index: 2;
+  top: 30px;
+}
+
+.card-3 {
+  z-index: 3;
+  top: 45px;
+}
+
+.card-4 {
+  z-index: 4;
+  top: 60px;
+}
+
+.card-5 {
+  z-index: 5;
+  top: 75px;
+}
+
+.card-6 {
+  z-index: 6;
+  top: 90px;
+}
+
+.card-border {
+  width: 100px;
+  height: 140px;
+}
+
+.empty-space {
+  width: 100px;
 }
