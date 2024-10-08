@@ -7,12 +7,20 @@ import {
 import icon from 'assets/cardfronts/card_outline_home.svg';
 import './App.css';
 import GameBoard from './GameBoard';
+import Deck from './Deck';
+import Deckuuid from './Deckuuid';
 
 function Home() {
   const navigate = useNavigate(); // Hook for programmatic navigation
 
   const handleNewGameClick = () => {
     navigate('/game'); // Navigate to the /game route
+  };
+  const handleDeckClick = () => {
+    navigate('/deck'); // Navigate to the /game route
+  };
+  const handleDeckuuidClick = () => {
+    navigate('/deckuuid'); // Navigate to the /game route
   };
   return (
     <div>
@@ -29,6 +37,14 @@ function Home() {
           New Game
         </button>
       </div>
+      <div className="deck-container">
+        <button type="button" className="deckuuidbtn" onClick={handleDeckClick}>
+          Deck
+        </button>
+        <button type="button" className="deckbtn" onClick={handleDeckuuidClick}>
+          Deck UUIDV4
+        </button>
+      </div>
     </div>
   );
 }
@@ -39,6 +55,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/game" element={<GameBoard />} />
+        <Route path="/deck" element={<Deck />} />
+        <Route path="/deckuuid" element={<Deckuuid />} />
       </Routes>
     </Router>
   );

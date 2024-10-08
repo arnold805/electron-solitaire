@@ -1,6 +1,8 @@
 import { expect, $, $$ } from '@wdio/globals';
 
-describe('Electron Testing', () => {
+const assert = require('assert');
+
+describe('Home and base game setup testing', () => {
   it('should print application title', async () => {
     await expect($('h1')).toHaveText('Welcome to Solitaire!');
   });
@@ -23,5 +25,38 @@ describe('Electron Testing', () => {
 
     const butterflyImgSrc = await butterflyImg.getAttribute('src');
     expect(butterflyImgSrc).toContain('.png');
+  });
+});
+
+describe('Deck Testing', () => {
+  it('should display the base 52 card deck with no duplicates', async () => {
+    // Check if the button to generate the deck exists and click it
+    const deckButton = await $('button=Deck');
+    const isButtonPresent = await deckButton.isExisting();
+    expect(isButtonPresent).toBe(true);
+
+    await deckButton.click();
+
+    // Capture all the card elements (adjust the selector if needed)
+    const cards = await $$('svg.card'); // If your cards are SVGs, adjust this to match the actual structure
+
+    // Check if 52 cards are rendered
+    const totalCards = cards.length;
+    expect(totalCards).toBe(52);
+
+    // Extract the values and suits from each card
+    const cardData = await Promise.all(
+      cards.map(async (card) => {
+        const value = await card.$('.card-value').getText(); // Adjust the selector if needed
+        const suit = await card.$('.card-suit').getText(); // Adjust the selector if needed
+        return { value, suit };
+      })
+    );
+
+    // Create a Set to ensure all cards are unique
+    const uniqueCards = new Set(cardData.map((card) => `${card.value} of ${card.suit}`));
+
+    // Assert that there are no duplicates (Set size should be 52)
+    expect(uniqueCards.size).toBe(52);
   });
 });
