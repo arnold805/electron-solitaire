@@ -6,9 +6,9 @@ import {
 } from 'react-router-dom';
 import icon from 'assets/cardfronts/card_outline_home.svg';
 import './App.css';
+import Deck from 'src/renderer/Deck';
 import GameBoard from './GameBoard';
-import Deck from './Deck';
-import Deckuuid from './Deckuuid';
+// import Deckuuid from './Deckuuid';
 
 function Home() {
   const navigate = useNavigate(); // Hook for programmatic navigation
@@ -19,16 +19,16 @@ function Home() {
   const handleDeckClick = () => {
     navigate('/deck'); // Navigate to the /game route
   };
-  const handleDeckuuidClick = () => {
-    navigate('/deckuuid'); // Navigate to the /game route
-  };
+  // const handleDeckuuidClick = () => {
+  //   navigate('/deckuuid'); // Navigate to the /game route
+  // };
   return (
-    <div>
+    <div className="main">
       <h1>Welcome to Solitaire!</h1>
       <div className="Home">
-        <img width="200" alt="icon" src={icon} />
+        <img width="200" className="electron-card" alt="icon" src={icon} />
       </div>
-      <div className="newgame-container">
+      <div className="buttons-container">
         <button
           type="button"
           className="newgamebtn"
@@ -36,13 +36,8 @@ function Home() {
         >
           New Game
         </button>
-      </div>
-      <div className="deck-container">
-        <button type="button" className="deckuuidbtn" onClick={handleDeckClick}>
+        <button type="button" className="Deck" onClick={handleDeckClick}>
           Deck
-        </button>
-        <button type="button" className="deckbtn" onClick={handleDeckuuidClick}>
-          Deck UUIDV4
         </button>
       </div>
     </div>
@@ -56,7 +51,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/game" element={<GameBoard />} />
         <Route path="/deck" element={<Deck />} />
-        <Route path="/deckuuid" element={<Deckuuid />} />
+        {/* <Route path="/deckuuid" element={<Deckuuid />} /> */}
       </Routes>
     </Router>
   );

@@ -1,29 +1,8 @@
-import CardBackground from 'src/renderer/CardBackground';
-import Deck from 'src/renderer/Deck';
-import blackicon from 'assets/cardfronts/card_outline_black_plain.svg';
-import clearoutline from 'assets/cardborders/card_outline_clear.svg';
+// GameBoard.tsx
 import './GameBoard.css';
-
-const cardValues = [
-  'A',
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
-  '7',
-  '8',
-  '9',
-  '10',
-  'J',
-  'Q',
-  'K',
-];
-
-const getRandomCardValue = () => {
-  const randomIndex = Math.floor(Math.random() * cardValues.length);
-  return cardValues[randomIndex];
-};
+import Deck from 'src/renderer/Deck';
+import clearoutline from 'assets/cardborders/card_outline_clear.svg';
+import blackicon from 'assets/cardfronts/card_outline_black_plain.svg';
 
 export default function GameBoard() {
   const svgs = [
@@ -53,7 +32,7 @@ export default function GameBoard() {
         {firstRowItems.map((svg, index) =>
           svg ? (
             <div key={index} className="card-container">
-              {index < 1 || index > 7 ? <CardBackground /> : null}
+              {index < 1 || index > 7 ? <Deck /> : null}
               <img src={svg} alt={`svg-${index}`} className="card-border" />
             </div>
           ) : (
@@ -69,9 +48,16 @@ export default function GameBoard() {
             {Array(index + 1)
               .fill(null)
               .map((_, cardIndex) => (
-                <div key={cardIndex} className={`tableau-cards card-${cardIndex}`}>
-                  <Deck cardValue={getRandomCardValue()} /> {/* Random card for each tableau */}
-                  <img src={svg} alt={`svg-tableau-${index}`} className="card-border" />
+                <div
+                  key={cardIndex}
+                  className={`tableau-cards card-${cardIndex}`}
+                >
+                  <Deck />
+                  <img
+                    src={svg}
+                    alt={`svg-tableau-${index}`}
+                    className="card-border"
+                  />
                 </div>
               ))}
           </div>

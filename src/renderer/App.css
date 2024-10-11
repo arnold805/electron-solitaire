@@ -19,6 +19,16 @@ body {
   align-items: center;
 }
 
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center-aligns the buttons horizontally */
+  margin-top: 40px;
+}
+
+.deck {
+  margin-top: 10px; /* Adds a 10px margin above the Deck button */
+}
 button {
   background-color: white;
   padding: 10px 20px;
@@ -31,6 +41,12 @@ button {
   transition: all ease-in 0.1s;
   cursor: pointer;
   opacity: 0.9;
+  margin-top: 10px;
+  width: 190px;
+}
+
+.electron-card {
+  margin-top: 15px;
 }
 
 .newgame-container {

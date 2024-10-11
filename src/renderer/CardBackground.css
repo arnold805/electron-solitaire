@@ -5,11 +5,7 @@
 }
 .card-front {
   position: absolute;
-  width: 96px;
-  height: 136px;
-  display: inline-block;
-  background-color: white;
-  border: 2px solid black;
-  border-radius: 8px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  width: 100px;
+  height: 140px;
+  border-radius: 10px;
 }
