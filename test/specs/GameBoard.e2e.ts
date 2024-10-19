@@ -1,11 +1,15 @@
-import { expect, $ } from '@wdio/globals';
+import { expect, $, $$ } from '@wdio/globals';
 
-describe('Deck generation test', () => {
-  it('should click the Deck button', async () => {
-    const deckButton = await $('button=Deck');
-    const isButtonPresent = await deckButton.isExisting();
+describe('Deck generation and game board test', () => {
+  it('should click a New Game button and navigate to the game page with the base setup', async () => {
+    const newGameButton = await $('button=New Game');
+    const isButtonPresent = await newGameButton.isExisting();
     expect(isButtonPresent).toBe(true);
-    await deckButton.click();
+
+    await newGameButton.click();
+    const gameBoardDiv = await $('.GameBoard');
+    const isGameBoardVisible = await gameBoardDiv.isExisting();
+    expect(isGameBoardVisible).toBe(true);
   });
   it('should render all 52 cards with correct alt attributes', async () => {
     // Array containing all expected alt attributes for a 52-card deck
@@ -72,5 +76,19 @@ describe('Deck generation test', () => {
         expect(isImgPresent).toBe(true);
       }),
     );
+  });
+  it('should have 21 card background elements on card-background-border', async () => {
+    // Locate all elements with the class 'card-background-tableau'
+    const bfbackgroundElementsTableau = await $$('.card-background-border');
+
+    // Assert that there are exactly 22 bfbackground elements
+    expect(bfbackgroundElementsTableau).toBeElementsArrayOfSize(21);
+  });
+  it('should have 1 card background element on card-border', async () => {
+    // Locate all elements with the class 'card-background-tableau'
+    const bfbackgroundElementsTableau = await $$('.card-border');
+
+    // Assert that there are exactly 22 bfbackground elements
+    expect(bfbackgroundElementsTableau).toBeElementsArrayOfSize(1);
   });
 });

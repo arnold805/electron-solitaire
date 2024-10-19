@@ -26,6 +26,7 @@
   width: 100px;
   height: 140px;
   margin-right: 20px;
+  position: relative; /* Position relative for background */
 }
 
 .first-row .card-container:last-child {
@@ -43,45 +44,70 @@
   position: absolute;
 }
 
+.card-background-deck {
+  position: absolute; /* Make the deck background behave like the tableau background */
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 140px;
+  z-index: 2;
+}
+
+.card-background {
+  position: absolute;
+  width: 100px;
+  height: 140px;
+  z-index: 2;
+}
+
+.card-background-tableau {
+  position: absolute;
+  width: 100px;
+  height: 140px;
+  z-index: 2;
+}
+
 /* Dynamic stacking based on cardIndex */
 .card-0 {
-  z-index: 0;
   top: 0px;
 }
 
 .card-1 {
-  z-index: 1;
   top: 15px;
 }
 
 .card-2 {
-  z-index: 2;
   top: 30px;
 }
 
 .card-3 {
-  z-index: 3;
   top: 45px;
 }
 
 .card-4 {
-  z-index: 4;
   top: 60px;
 }
 
 .card-5 {
-  z-index: 5;
   top: 75px;
 }
 
 .card-6 {
-  z-index: 6;
   top: 90px;
 }
 
 .card-border {
   width: 100px;
   height: 140px;
+  position: absolute;
+  z-index: 2; /* Ensure it is above the background */
+}
+
+.deck-cover {
+  position: absolute;
+  width: 100px;
+  height: 140px;
+  z-index: 2; /* Ensure it is above the background */
 }
 
 .empty-space {

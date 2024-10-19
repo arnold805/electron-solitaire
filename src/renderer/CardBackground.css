@@ -7,5 +7,12 @@
   position: absolute;
   width: 100px;
   height: 140px;
-  border-radius: 10px;
+  border-radius: 15px;
+}
+
+.card-background-border {
+  position: relative;
+  width: 100px;
+  height: 140px;
+  z-index: 3;
 }
