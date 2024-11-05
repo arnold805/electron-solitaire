@@ -18,30 +18,65 @@
 
 .second-row {
   display: flex;
-  justify-content: space-between;
   width: 100%;
 }
 
 .card-container {
   width: 100px;
   height: 140px;
+}
+
+.card-spot {
+  width: 100px;
+  height: 140px;
   margin-right: 20px;
 }
 
-.first-row .card-container:last-child {
-  margin-right: 0;
+.card-spot-blank {
+  width: 100px;
+  height: 140px;
+  margin-right: 20px;
 }
 
 .tableau-column {
   position: relative;
   width: 100px;
-  height: auto;
-  margin: 0;
+  margin-right: 20px;
 }
 
 .tableau-cards {
   position: absolute;
 }
+
+.card-front {
+  width: 100px;
+  position: absolute;
+}
+
+.svg-0 {
+  z-index: -99;
+}
+
+.deck-cover {
+  position: absolute;
+  width: 100px;
+  height: 140px;
+  z-index: 1;
+}
+
+.deck-cover-svg {
+  position: absolute;
+  width: 100px;
+  height: 140px;
+  z-index: 2;
+}
+
+.card-background {
+  position: absolute;
+  width: 100px;
+  height: 140px;
+}
+
 
 /* Dynamic stacking based on cardIndex */
 .card-0 {
@@ -80,8 +115,10 @@
 }
 
 .card-border {
+  position: relative;
   width: 100px;
   height: 140px;
+  z-index: 8;
 }
 
 .empty-space {
