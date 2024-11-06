@@ -40,4 +40,14 @@ describe('Game board test', () => {
     const cardSpotBlank = await $('img.card-spot[alt="svg-6"');
     await expect(cardSpotBlank).toBeDisplayed();
   });
+  it('should click the Deck button to reveal the 24 cards of the deck stacked', async () => {
+    const deckButton = await $('button=Deck');
+    const isButtonPresent = await deckButton.isExisting();
+    expect(isButtonPresent).toBe(true);
+    await deckButton.click();
+
+    const slotDiv = await $('.slot-0');
+    const deckCards = await slotDiv.$$('img.card-front');
+    expect(deckCards).toHaveLength(24);
+  });
 });

@@ -115,9 +115,6 @@ const allCards = [
   { suit: 'spades', image: SpadesK, alt: 'spades_K' },
 ];
 
-console.log('allCards');
-console.log(allCards);
-
 // Function to get the next card
 let cardIndex = 0;
 
@@ -131,8 +128,6 @@ const shuffleArray = (array: any[]) => {
 };
 
 const shuffledCards = shuffleArray(allCards);
-console.log('shuffledCards');
-console.log(shuffledCards);
 
 export default function Deck() {
   return null;
@@ -142,7 +137,7 @@ function getCard() {
   if (cardIndex < shuffledCards.length) {
     const card = shuffledCards[cardIndex];
     cardIndex += 1;
-    console.log(`Current card index: ${cardIndex}`);
+    console.log(`Current card ${cardIndex}: ${card.alt}`);
     return (
       <img
         key={cardIndex}
