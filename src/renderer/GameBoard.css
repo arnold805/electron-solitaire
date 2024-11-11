@@ -64,6 +64,13 @@
   z-index: 1;
 }
 
+.deck-null {
+  position: absolute;
+  width: 100px;
+  height: 140px;
+  z-index: 9;
+}
+
 .deck-cover-svg {
   position: absolute;
   width: 100px;

@@ -1,15 +1,20 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './GameBoard.css';
 import { getCard } from 'src/renderer/GetCard';
 import clearoutline from 'assets/cardborders/card_outline_clear.svg';
+import decknull from 'assets/cardborders/card_outline_grey_null.svg';
 import blackborder from 'assets/cardborders/outline_black.svg';
 import bfbackground from 'assets/cardbacks/butterfly_background.png';
 
 export default function GameBoard() {
   const [backgroundVisible] = useState(true);
-  const [deckFirstClick, setDeckFirstClick] = useState(false);
+  const [showDeckCover, setShowDeckCover] = useState(true);
+  const [showDeckCoverSvg, setShowDeckCoverSvg] = useState(true);
+  const [dexkNull, setDeckNull] = useState(false);
   const [firstRowElements, setFirstRowElements] = useState<React.JSX.Element[]>([]);
   const [secondRowElements, setSecondRowElements] = useState<React.JSX.Element[]>([]);
+  const [deckCardCount, setDeckCardCount] = useState(24);
+  const initialDeckCountRef = useRef(deckCardCount);
 
   const getSvg = (index: number) => {
     return index === 2 ? clearoutline : blackborder;
@@ -66,19 +71,46 @@ export default function GameBoard() {
     setSecondRowElements(bottomRowElements);
   }, []);
 
+  // const deckClick = useCallback(() => {
+  //   console.log(`deck count ${deckCardCount}`);
+  //   if (deckCardCount === 0) {
+  //     const deckCover = document.querySelector('.deck-cover');
+  //     if (deckCover) {
+  //       deckCover.remove();
+  //     }
+  //     const deckCoverSvg = document.querySelector('.deck-cover-svg') as HTMLElement;
+  //     if (deckCoverSvg) {
+  //       deckCoverSvg.style.zIndex = '-2';
+  //     }
+  //   }
+  // }, []);
+
   const deckClick = useCallback(() => {
-    if (!deckFirstClick) {
-      const deckCover = document.querySelector('.deck-cover');
-      if (deckCover) {
-        deckCover.remove();
+    setDeckCardCount((prevDeckCount) => {
+      const newDeckCount = prevDeckCount - 1;
+      console.log(`new deck count: ${newDeckCount}`);
+
+      // Check if we reach 0 to remove the deck cover
+      if (newDeckCount === 0) {
+        setShowDeckCover(false);
+        setShowDeckCoverSvg(false);
       }
-      const deckCoverSvg = document.querySelector('.deck-cover-svg') as HTMLElement;
-      if (deckCoverSvg) {
-        deckCoverSvg.style.zIndex = '-2';
+      if (newDeckCount === -1) {
+        setShowDeckCover(true);
+        setShowDeckCoverSvg(true);
+        setDeckCardCount(deckCardCount);
+      } else {
+        setDeckNull(true);
+        const slot0 = document.querySelector('.slot-0');
+        const slot1 = document.querySelector('.slot-1');
+        const slot0Card = slot0?.querySelector('.card-front') as HTMLElement;
+        const slot1CardSpots = slot1?.querySelectorAll('.card-front') || [];
+        console.log(slot1CardSpots);
       }
-      setDeckFirstClick(true);
-    }
-  }, [deckFirstClick]);
+
+      return newDeckCount;
+    });
+  }, []);
 
   return (
     <div className="GameBoard">
@@ -86,12 +118,22 @@ export default function GameBoard() {
         Deck
       </button>
       <div className="first-row">
-        <img src={bfbackground} alt="card-background" className="deck-cover" />
-        <img
-          src={blackborder}
-          alt="deck-cover-border"
-          className="deck-cover-svg"
-        />
+        {showDeckCover ? (
+          <img
+            src={bfbackground}
+            alt="card-background"
+            className="deck-cover"
+          />
+        ) : (
+          <img src={decknull} alt="deck-null" className="deck-null" />
+        )}
+        {showDeckCoverSvg && (
+          <img
+            src={blackborder}
+            alt="deck-cover-border"
+            className="deck-cover-svg"
+          />
+        )}
         {firstRowElements}
       </div>
 

@@ -1,5 +1,11 @@
 import { expect, $ } from '@wdio/globals';
 
+async function clickMultipleTimes(element, times) {
+  for (let i = 0; i < times; i += 1) {
+    element.click();
+  }
+}
+
 describe('Game board test', () => {
   it('should click a New Game button and navigate to the game page with the base setup', async () => {
     const newGameButton = await $('button=New Game');
@@ -11,7 +17,6 @@ describe('Game board test', () => {
     const isGameBoardVisible = await gameBoardDiv.isExisting();
     expect(isGameBoardVisible).toBe(true);
   });
-  // test for the first row deck and draw pile,foundation piles
   it('should find the 1st element in the first row as a black svg', async () => {
     const cardSpotBlank = await $('img.card-spot[alt="svg-0"');
     await expect(cardSpotBlank).toBeDisplayed();
@@ -40,14 +45,25 @@ describe('Game board test', () => {
     const cardSpotBlank = await $('img.card-spot[alt="svg-6"');
     await expect(cardSpotBlank).toBeDisplayed();
   });
-  it('should click the Deck button to reveal the 24 cards of the deck stacked', async () => {
+  it('the deck should contain 24 cards (slot-0)', async () => {
+    const slotDiv0 = await $('.slot-0');
+    const deckCards = await slotDiv0.$$('img.card-front');
+    expect(deckCards).toHaveLength(24);
+  });
+  it('should click the deck 24 time to show the null deck icon', async () => {
     const deckButton = await $('button=Deck');
     const isButtonPresent = await deckButton.isExisting();
     expect(isButtonPresent).toBe(true);
-    await deckButton.click();
-
-    const slotDiv = await $('.slot-0');
-    const deckCards = await slotDiv.$$('img.card-front');
-    expect(deckCards).toHaveLength(24);
+    clickMultipleTimes(deckButton, 24);
+    const nullDeckIcon = await $('div.first-row img.deck-null');
+    await expect(nullDeckIcon).toBeDisplayed();
+  });
+  it('should click the deck 1 more time to show the deck cover', async () => {
+    const deckButton = await $('button=Deck');
+    const isButtonPresent = await deckButton.isExisting();
+    expect(isButtonPresent).toBe(true);
+    deckButton.click();
+    const nullDeckIcon = await $('div.first-row img.deck-cover');
+    await expect(nullDeckIcon).toBeDisplayed();
   });
 });
