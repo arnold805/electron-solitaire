@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import DiamondA from 'assets/cardfronts/diamonds/diamonds_A.png';
 import Diamond02 from 'assets/cardfronts/diamonds/diamonds_02.png';
 import Diamond03 from 'assets/cardfronts/diamonds/diamonds_03.png';

@@ -11,29 +11,19 @@
 
 .first-row {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
   margin-bottom: 10px;
 }
 
 .second-row {
   display: flex;
-  width: 100%;
-}
-
-.card-container {
-  width: 100px;
-  height: 140px;
 }
 
 .card-spot {
-  width: 100px;
   height: 140px;
   margin-right: 20px;
 }
 
 .card-spot-blank {
-  width: 100px;
   height: 140px;
   margin-right: 20px;
 }
@@ -48,10 +38,34 @@
   position: absolute;
 }
 
-.card-front {
+
+.slot-0,
+.slot-1 {
+  position: relative;
   width: 100px;
-  position: absolute;
+  height: 140px;
+  margin-right: 20px; /* Add the 20px margin */
+  margin-bottom: 10px; /* Optional: If vertical spacing is needed */
 }
+
+.card-front {
+  position: absolute; /* Ensure positioning within parent */
+  top: 0; /* Reset offsets */
+  left: 0;
+  width: 100px;
+  height: 140px;
+  margin: 0; /* Reset inherited styles */
+  padding: 0;
+}
+
+/* TODO: fix */
+/* to adjust for misalignment bug */
+/* somehow card is actually placed within slot-1 but appears to be exactly in slot-1 */
+/* 240 pixel offset is coming from unknown source */
+/* .slot-1 .card-front {
+  position: fixed;
+  left: 226px;
+} */
 
 .svg-0 {
   z-index: -99;

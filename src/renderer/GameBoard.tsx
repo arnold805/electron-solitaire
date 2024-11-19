@@ -10,11 +10,9 @@ export default function GameBoard() {
   const [backgroundVisible] = useState(true);
   const [showDeckCover, setShowDeckCover] = useState(true);
   const [showDeckCoverSvg, setShowDeckCoverSvg] = useState(true);
-  const [dexkNull, setDeckNull] = useState(false);
   const [firstRowElements, setFirstRowElements] = useState<React.JSX.Element[]>([]);
   const [secondRowElements, setSecondRowElements] = useState<React.JSX.Element[]>([]);
   const [deckCardCount, setDeckCardCount] = useState(24);
-  const initialDeckCountRef = useRef(deckCardCount);
 
   const getSvg = (index: number) => {
     return index === 2 ? clearoutline : blackborder;
@@ -71,26 +69,11 @@ export default function GameBoard() {
     setSecondRowElements(bottomRowElements);
   }, []);
 
-  // const deckClick = useCallback(() => {
-  //   console.log(`deck count ${deckCardCount}`);
-  //   if (deckCardCount === 0) {
-  //     const deckCover = document.querySelector('.deck-cover');
-  //     if (deckCover) {
-  //       deckCover.remove();
-  //     }
-  //     const deckCoverSvg = document.querySelector('.deck-cover-svg') as HTMLElement;
-  //     if (deckCoverSvg) {
-  //       deckCoverSvg.style.zIndex = '-2';
-  //     }
-  //   }
-  // }, []);
-
   const deckClick = useCallback(() => {
     setDeckCardCount((prevDeckCount) => {
       const newDeckCount = prevDeckCount - 1;
       console.log(`new deck count: ${newDeckCount}`);
 
-      // Check if we reach 0 to remove the deck cover
       if (newDeckCount === 0) {
         setShowDeckCover(false);
         setShowDeckCoverSvg(false);
@@ -98,14 +81,23 @@ export default function GameBoard() {
       if (newDeckCount === -1) {
         setShowDeckCover(true);
         setShowDeckCoverSvg(true);
+        const slot1 = document.querySelector('.slot-1');
+        const slot0 = document.querySelector('.slot-0');
+        const slot1CardSpots = slot1?.querySelectorAll('.card-front') || [];
+        // Remove each child from its parent
+        slot1CardSpots.forEach((cardSpot) => {
+          slot1?.removeChild(cardSpot);
+          slot0?.appendChild(cardSpot);
+        });
         setDeckCardCount(deckCardCount);
-      } else {
-        setDeckNull(true);
+      } else if (newDeckCount >= 0) {
         const slot0 = document.querySelector('.slot-0');
         const slot1 = document.querySelector('.slot-1');
         const slot0Card = slot0?.querySelector('.card-front') as HTMLElement;
-        const slot1CardSpots = slot1?.querySelectorAll('.card-front') || [];
-        console.log(slot1CardSpots);
+        slot0.removeChild(slot0Card);
+        console.log(`card ${slot0Card} removed`);
+        slot1.appendChild(slot0Card);
+        console.log(`card ${slot0Card} appended`);
       }
 
       return newDeckCount;
